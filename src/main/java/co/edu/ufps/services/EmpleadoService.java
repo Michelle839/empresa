@@ -110,6 +110,25 @@ public class EmpleadoService {
 
 	        return empleadosGuardados;
 	    }
+	 
+	 public List<Empleado> crearEmpleadosConProyectos1(List<Empleado> empleados) {
+	        List<Empleado> empleadosGuardados = new ArrayList<>();
+
+	        // Recorremos la lista de empleados que viene en el JSON
+	        for (Empleado empleado : empleados) {
+	            // Guardar los proyectos asociados (si la relación está bien mapeada, CascadeType.ALL lo manejará)
+	            for (Proyecto proyecto : empleado.getProyectos()) {
+	                // Asociar explícitamente el empleado a cada proyecto
+	                proyecto.setEmpleado(empleado);
+	            }
+
+	            // Guardamos el empleado junto con sus proyectos asociados en cascada
+	            Empleado empleadoGuardado = empleadoRepository.save(empleado);
+	            empleadosGuardados.add(empleadoGuardado);
+	        }
+
+	        return empleadosGuardados;
+	    }
 
 //	    // Método para convertir de entidad a DTO
 //	    public EmpleadoDTO toEmpleadoDTO(Empleado empleado) {

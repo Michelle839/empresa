@@ -32,7 +32,7 @@ public class EmpleadoController {
 	
 	@PostMapping("/crear-multiples")
     public List<Empleado> crearEmpleadosConProyectos(@RequestBody List<Empleado> empleados) {
-        return empleadoService.crearempleadosconproyectos(empleados);
+        return empleadoService.crearEmpleadosConProyectos1(empleados);
     }
 	@PostMapping
 	public Empleado create(@RequestBody Empleado Empleado) {
