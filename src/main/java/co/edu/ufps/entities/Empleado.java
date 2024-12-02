@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,8 +39,8 @@ public class Empleado {
 	private String telefono;
 	
 	@OneToMany(mappedBy = "empleado", cascade= CascadeType.ALL)
-	@JsonIgnore
-	private List<Proyecto> proyectos = new ArrayList<>();  // Inicializamos la lista para evitar NullPointerException
+	@JsonManagedReference
+	private List<Proyecto> proyectos = new ArrayList<>(); // Inicializamos la lista para evitar NullPointerException
 	
 	
 	public void addProyecto(Proyecto proyecto) {

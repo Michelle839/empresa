@@ -2,6 +2,7 @@ package co.edu.ufps.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -43,6 +44,7 @@ public class Proyecto {
 	
 	@ManyToOne 
 	@JoinColumn(name="empleado_id", nullable = false)
+	@JsonBackReference
 	private Empleado empleado;
 
 }

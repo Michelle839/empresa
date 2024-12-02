@@ -24,16 +24,35 @@ public class EmpleadoController {
 	@Autowired
 	private EmpleadoService empleadoService;
 
-	@PostMapping("/crear")
-	    public ResponseEntity<Empleado> crearEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {
-	        Empleado empleado = empleadoService.crearEmpleadoConProyectos(empleadoDTO);
-	        return ResponseEntity.status(HttpStatus.CREATED).body(empleado);
-	}
+//	@PostMapping("/crear")
+//	    public ResponseEntity<Empleado> crearEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {
+//	        Empleado empleado = empleadoService.crearEmpleadoConProyectos(empleadoDTO);
+//	        return ResponseEntity.status(HttpStatus.CREATED).body(empleado);
+//	}
+//	
+//	@PostMapping("/crear-multiples")
+//	public ResponseEntity<Void> crearEmpleados(@RequestBody List<EmpleadoDTO> empleadosDTO) {
+//	    // Llama al servicio para guardar los empleados y sus proyectos
+//	    empleadoService.crearEmpleadosConProyectos(empleadosDTO);
+//
+//	    // Devuelve un estado HTTP 201 (Created) sin contenido en el cuerpo
+//	    return ResponseEntity.status(HttpStatus.CREATED).build();
+//	}
 	
+	 @GetMapping("/todos/empleados")
+	    public ResponseEntity<List<EmpleadoDTO>> obtenerTodosLosEmpleados2() {
+	        // Llama al servicio para obtener todos los empleados y convertirlos en DTOs
+	        List<EmpleadoDTO> empleadosDTO = empleadoService.obtenerTodosLosEmpleados2();
+
+	        // Retorna la lista de empleados en formato JSON (response 200 OK)
+	        return ResponseEntity.ok(empleadosDTO);
+	    }
+	 
 	@PostMapping("/crear-multiples")
     public List<Empleado> crearEmpleadosConProyectos(@RequestBody List<Empleado> empleados) {
-        return empleadoService.crearempleadosconproyectos(empleados);
+        return empleadoService.crearEmpleadosConProyectos1(empleados);
     }
+
 	@PostMapping
 	public Empleado create(@RequestBody Empleado Empleado) {
 		return empleadoService.create(Empleado);
@@ -43,6 +62,12 @@ public class EmpleadoController {
 	public List<Empleado>  list() {
 		return empleadoService.list();
 	}
+	
+	@GetMapping("/todos")
+    public ResponseEntity<List<EmpleadoDTO>> obtenerTodosLosEmpleados() {
+        List<EmpleadoDTO> empleadosDTO = empleadoService.obtenerTodosLosEmpleados();
+        return ResponseEntity.ok(empleadosDTO);
+    }
 	
 	
 	@GetMapping("/{id}")
